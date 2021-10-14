@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <title>User page</title>
+</head>
+<body>
+<div class="container">
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/" class="nav-link active">Back</a></li>
+        </ul>
+    </header>
+    <style>
+        .divv {
+            height: auto;
+            outline: 1px solid #1E90FF;
+            border-radius: 10px;
+        }
+    </style>
+    <div th:each="el: ${post}" class="text-center">
+        <h1 class="card-title"><p th:text="${el.title}"></p></h1>
+        <div class="divv">
+            <p class="card-text-left mb-auto" th:text="${el.condition}"></p>
+        </div>
+    </div>
+    <br>
+    <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2">
+            <input type="text" class="form-control" placeholder="Answer">
+        </div>
+        <button type="submit" class="btn btn-outline-success mb-2">Check</button>
+    </form>
+</div>
+</body>
+</html>

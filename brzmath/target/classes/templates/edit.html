@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+<header class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills">
+        <li class="nav-item"><a href="/MyAccount" class="nav-link active">Back</a></li>
+    </ul>
+</header>
+<div class="container mt-5">
+    <h1 class="text-center">Edit task</h1><br>
+    <div th:each="el: ${post}">
+        <form method="post">
+            <h5>Title</h5>
+            <input type="text" th:value="${el.title}" name="title" placeholder="Title" class="form-control"><br>
+            <h5>Condition</h5>
+            <textarea name="condition" placeholder="Condition" class="form-control" th:text="${el.condition}"/><br>
+            <h5>Theme</h5>
+            <input type="text" name="theme" th:value="${el.theme}" placeholder="Theme" class="form-control"><br>
+            <button type="submit" class="btn btn-outline-success">Edit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

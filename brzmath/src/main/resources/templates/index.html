@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <link href="/static/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container ">
+    <header th:insert="blocks/header :: header"></header>
+    <form>
+        <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+    </form>
+    <h1 class="my-4">
+        Tasks
+    </h1>
+    <div th:each="el: ${posts}" class="card mb-4 box-shadow text-center">
+        <div class="card-body">
+            <h3 class="card-title"><p th:text="${el.title}"></p></h3>
+            <p class="card-text-left mb-auto" th:text="${el.theme}"></p><br>
+            <a th:href="'/task/' + ${el.id}" class="btn btn-primary">View</a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

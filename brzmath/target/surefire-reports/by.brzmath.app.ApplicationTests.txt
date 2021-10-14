@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: by.brzmath.app.ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 24.668 s <<< FAILURE! - in by.brzmath.app.ApplicationTests
+contextLoads  Time elapsed: 13.512 s  <<< ERROR!
+java.lang.StackOverflowError
+
