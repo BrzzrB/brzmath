@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <title>User page</title>
 </head>
 <body>
@@ -17,59 +15,102 @@
         <ul class="nav nav-pills">
             <li class="nav-item"><a href="/" class="nav-link" aria-current="page">Main page</a></li>
             <li class="nav-item"><a href="/MyAccount" class="nav-link active">My account</a></li>
-            <li class="nav-item"><a href="/admin" class="nav-link fa-th">Admin</a></li>
-            <li class="nav-item"><a href="/oauth2/authorization/github" class="nav-link fa-th">github</a></li>
-            <li class="nav-item"><a href="/oauth2/authorization/google" class="nav-link fa-th">google</a></li>
         </ul>
-    </header>
-    <div class="card text-center" style="width: 18rem;">
-        <div class="card-body">
-            <div th:each="el: ${users}">
-                <p th:text="${el.username}"></p>
-                <p th:text="${user_p}"></p>
-                <p>
-                    <span th:text="${el.createdTasks}"></span>
-                    <span th:text="${el.solvedTasks}"></span>
-                </p>
-            </div>
+        <div id="accordion">
+            <div class="card text-center mb-3">
+                <div class="card-header bg-white" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-outline-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <div th:each="el: ${users}">
+                                <span th:text="${el.username}"></span>
+                            </div>
+                        </button>
+                    </h5>
+                </div>
 
-        </div>
-    </div>
-    <div class="d-flex justify-content-center py-3">
-
-    </div>
-    <div class="d-flex justify-content-left py-3">
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a href="/addNew" class="nav-link active">Add a new task</a></li>
-
-        </ul>
-    </div>
-
-    <div th:each="el: ${posts}">
-        <div class="card mb-4 box-shadow">
-            <div class="card-body">
-                <h2 th:text="${el.title}"/>
-                <p th:text="${el.theme}"></p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <div class="btn-group mr-2" role="group">
-                            <a th:href="'/task/' + ${el.id}" class="btn btn-outline-primary" role="button">view</a>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <div th:each="el: ${users}">
+                            <p th:text="'ID: ' + ${user_p}"></p>
+                            <p>
+                                <span th:text="'Created tasks: '+ ${el.createdTasks} + ' | '"></span>
+                                <span th:text="'Solved tasks: ' + ${el.solvedTasks}"></span>
+                            </p>
                         </div>
-                        <div class="btn-group mr-2" role="group">
-                            <a th:href="'/task/' + ${el.id} + '/edit'" class="btn btn-outline-primary"
-                               role="button">edit</a>
-                        </div>
-
+                        <p>
+                            <a href="/addNew" class="btn btn-primary">Add new task</a>
+                            <a href="/logout" class="btn btn-outline-danger">Logout</a>
+                        </p>
                     </div>
-                    <small class="text-muted" th:text="'views: ' + ${el.views}"></small>
-                    <form th:action="${el.id} + '/remove'" method="post">
-                        <button class="btn btn-outline-danger" type="submit">Delete</button>
-                    </form>
                 </div>
             </div>
+        </div>
+        <style>
+            #accordion
+            {
+                margin-left: auto;
+                font-size: 16px;
+            }
+        </style>
+    </header>
+    <div class="row justify-content-center">
+        <div class="col">
+            <table id="tasks-table" class="table table table-light">
+                <thead class="table">
+                <tr>
+                    <th scope="col" style="width: 5%">
+                        <input type="checkbox" onchange="checkedDisplayed(this)">
+                    </th>
+                    <th scope="col" style="width: 5%">Task id</th>
+                    <th scope="col" style="width: 10%">Title</th>
+                    <th scope="col" style="width: 10%">
+                        <select id="socialSelect" class="form-select" onchange="myFilter()">
+                            <option selected>Theme</option>
+                            <option>Geometry</option>
+                            <option>Algebra</option>
+                            <option>Python</option>
+                            <option>Logic</option>
+                            <option>Java</option>
+                        </select>
+                    </th>
+                    <th scope="col" style="width: 10%">Views</th>
+                    <th scope="col" style="width: 7%">View</th>
+                    <th scope="col" style="width: 7%">Edit</th>
+                    <th scope="col" style="width: 7%">Delete</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                    <tr th:each="post:${posts}">
+                        <td scope="row" style="width: 5%"><input type="checkbox"></td>
+                        <td th:text="${post.id}" style="width: 10%">task id</td>
+                        <td th:text="${post.title}" style="width: 10%">title</td>
+                        <td th:text="${post.theme}" style="width: 10%">theme</td>
+                        <td th:text="${post.views}" style="width: 10%">views</td>
+                        <td><a th:href="'/task/' + ${post.id}" style="text-decoration: none;">view</a>
+                        <td><a th:href="'/task/' + ${post.id} + '/edit'" style="text-decoration: none;">edit</a>
+                        <td><a th:href="'/task/' + ${post.id} + '/remove'" style="text-decoration: none;">delete</a>
+
+                    </tr>
+                </tbody>
+            </table>
+            <style>
+                table tr td a {
+                    display:block;
+                    height:100%;
+                    width:100%;
+                }
+                table tr td {
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+            </style>
         </div>
     </div>
 
 </div>
+<script type="text/javascript" src="/js/blockedScript.js"></script>
+<script type="text/javascript" src="js/filterAndSortTableUser.js"></script>
+<script type="text/javascript" src="js/buttonsScripts.js"></script>
 </body>
 </html>

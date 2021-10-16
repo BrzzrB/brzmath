@@ -5,6 +5,7 @@ by\brzmath\app\models\Post.class
 by\brzmath\app\config\MvsConfig.class
 by\brzmath\app\controllers\MyAccountController.class
 by\brzmath\app\controllers\MainPageController.class
+by\brzmath\app\services\AdminService.class
 by\brzmath\app\controllers\AdminPageController.class
 by\brzmath\app\services\PostService.class
 by\brzmath\app\config\WebSecurityConfig.class

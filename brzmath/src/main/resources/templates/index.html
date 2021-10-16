@@ -1,33 +1,81 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <title>Main page</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
     <link href="/static/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<div class="container ">
-    <header th:insert="blocks/header :: header"></header>
-    <form>
-        <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-    </form>
-    <h1 class="my-4">
-        Tasks
-    </h1>
-    <div th:each="el: ${posts}" class="card mb-4 box-shadow text-center">
-        <div class="card-body">
-            <h3 class="card-title"><p th:text="${el.title}"></p></h3>
-            <p class="card-text-left mb-auto" th:text="${el.theme}"></p><br>
-            <a th:href="'/task/' + ${el.id}" class="btn btn-primary">View</a>
+    <div class="container ">
+        <header class="d-flex justify-content-center py-3">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Main page</a></li>
+                <li class="nav-item"><a href="/MyAccount" class="nav-link">My account</a></li>
+            </ul>
+            <div id="accordion">
+                <div class="card text-center mb-3">
+                    <div class="card-header bg-white" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-outline-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Login by social
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <div id="auth">
+                                <a href="/oauth2/authorization/github">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="20%" height="20%"
+                                         alt="github"/>
+                                </a>
+                                <a href="/oauth2/authorization/google">
+                                    <img src="https://www.elegant-fs.gr/wp-content/uploads/2019/11/new-google-favicon-512.png"
+                                         width="20%" height="20%" alt="google"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <style>
+            #auth
+            {
+                width: 200px;
+            }
+            #accordion
+            {
+                margin-left: auto;
+                font-size: 16px;
+            }
+        </style>
+        </header>
+        <form>
+            <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        </form>
+        <h1 class="my-4">
+            Tasks
+        </h1>
+        <div th:each="el: ${posts}">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                    <h2 th:text="${el.title}"/>
+                    <p th:text="${el.theme}"></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <div class="btn-group mr-2" role="group">
+                                <a th:href="'task/' +  ${el.id}" class="btn btn-outline-primary" role="button">view</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-</div>
 </body>
 </html>

@@ -32,7 +32,7 @@
     </div>
     <div class="d-flex justify-content-left py-3">
         <ul class="nav nav-pills">
-            <li class="nav-item"><a href="/addNew" class="nav-link active">Add a new task</a></li>
+            <li class="nav-item"><a th:href="'/admin/addNew/' + ${userId}" class="nav-link active">Add a new task</a></li>
 
         </ul>
     </div>
@@ -45,16 +45,16 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <div class="btn-group mr-2" role="group">
-                            <a th:href="'/task/' + ${el.id}" class="btn btn-outline-primary" role="button">view</a>
+                            <a th:href="'/admin/task/' + ${el.id} + '/view'" class="btn btn-outline-primary" role="button">view</a>
                         </div>
                         <div class="btn-group mr-2" role="group">
-                            <a th:href="'/task/' + ${el.id} + '/edit'" class="btn btn-outline-primary"
+                            <a th:href="'/admin/task/' + ${el.id} + '/edit'" class="btn btn-outline-primary"
                                role="button">edit</a>
                         </div>
 
                     </div>
                     <small class="text-muted" th:text="'views: ' + ${el.views}"></small>
-                    <form th:action="'/admin/' + ${userId} + '/' + ${el.id} + '/remove'" method="post">
+                    <form th:action="'/admin/' + ${el.id} + '/remove'" method="post">
                         <button class="btn btn-outline-danger" type="submit">Delete</button>
                     </form>
                 </div>

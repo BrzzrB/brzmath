@@ -17,14 +17,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
 
                 .authorizeRequests()
-                    .antMatchers("/login","/error","/resources/**","/", "/task/**").permitAll()
+                    .antMatchers("/error","/resources/**","/", "/task/**").permitAll()
                     .antMatchers("/css/**").permitAll()
                     .antMatchers("/img/**").permitAll()
                     .antMatchers("/js/**").permitAll()
+                    //////.antMatchers("/admin/**").hasRole("ADMIN")//////
                     .anyRequest().authenticated()
                     .and()
                 .oauth2Login()
-                    .loginPage("/login")
+                    .loginPage("/")
                     .defaultSuccessUrl("/MyAccount")
                     .failureUrl("/")
                     .and()

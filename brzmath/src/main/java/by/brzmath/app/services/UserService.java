@@ -96,4 +96,9 @@ public class UserService {
                 .get(securityUtil.keyBySocial(social));
         return userRepository.findAllByUsernameAndSocial(username,social);
     }
+    public Object findAllByUserIdPrincipal(String name)
+    {
+        Iterable<User> users = userRepository.findAllByUserIdPrincipal(name);
+        return users;
+    }
 }

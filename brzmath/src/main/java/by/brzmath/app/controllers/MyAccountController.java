@@ -4,6 +4,7 @@ import by.brzmath.app.models.Post;
 import by.brzmath.app.models.User;
 import by.brzmath.app.repositories.PostRepository;
 import by.brzmath.app.repositories.UserRepository;
+import by.brzmath.app.services.PostService;
 import by.brzmath.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,13 +23,17 @@ import java.text.SimpleDateFormat;
 public class MyAccountController {
 
     @Autowired
-    private PostRepository postRepository;
+    private PostService postService;
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private PostRepository postRepository;
+    @Autowired
     private UserService userService;
     @Autowired
-    public MyAccountController(UserService userService) {
+    public MyAccountController(PostService postService, PostRepository postRepository, UserService userService) {
+        this.postService = postService;
+        this.postRepository = postRepository;
         this.userService = userService;
     }
     public MyAccountController(UserRepository userRepository) {
@@ -53,20 +58,12 @@ public class MyAccountController {
         model.addAttribute("idUser",userService.findAllByToken(token).get(0).getId());
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Iterable<Post> posts = postRepository.findAllByUserId(auth.getName());
-        Iterable<User> users = userRepository.findAllByUserIdPrincipal(auth.getName());
-        model.addAttribute("posts", posts);
-        model.addAttribute("users", users);
+        model.addAttribute("posts", postService.findAllByUserId(auth.getName()));
+        model.addAttribute("users", userService.findAllByUserIdPrincipal(auth.getName()));
         model.addAttribute("user_p", auth.getName());
 
         return "MyAccount";
     }
 
-    @PostMapping("/addNew")
-    public String AddNewTask(Principal principal, @RequestParam String title, @RequestParam String condition, @RequestParam String theme) {
-        String userId = principal.getName();
-        Post post = new Post(title, condition, theme, userId);
-        postRepository.save(post);
-        return "redirect:/MyAccount";
-    }
+
 }

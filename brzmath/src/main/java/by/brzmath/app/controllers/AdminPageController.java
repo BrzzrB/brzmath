@@ -1,7 +1,8 @@
 package by.brzmath.app.controllers;
 
-import by.brzmath.app.models.Post;
 import by.brzmath.app.repositories.PostRepository;
+import by.brzmath.app.services.AdminService;
+import by.brzmath.app.services.PostService;
 import by.brzmath.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -18,10 +19,14 @@ import java.text.SimpleDateFormat;
 @Controller
 public class AdminPageController {
     private final UserService userService;
+    private AdminService adminService;
+    private PostService postService;
 
     @Autowired
-    public AdminPageController(UserService userService) {
+    public AdminPageController(UserService userService, AdminService adminService, PostService postService) {
         this.userService = userService;
+        this.adminService = adminService;
+        this.postService = postService;
     }
 
     @Autowired
@@ -62,13 +67,42 @@ public class AdminPageController {
         return "admin";
     }
 
-        @GetMapping("/admin/{userId}")
-        public String adminUser(@PathVariable(value = "userId") String userId, Model model) {
-            Iterable<Post> posts = postRepository.findAllByUserId(userId);
-            model.addAttribute("posts", posts);
-            model.addAttribute("userId", userId);
-            return "adminUser";
-        }
+    @GetMapping("/admin/{userId}")
+    public String adminUser(@PathVariable(value = "userId") String userId, Model model) {
+        model.addAttribute("posts", adminService.UserPageAdmin(userId));
+        model.addAttribute("userId", userId);
+        return "adminUser";
+    }
+    @GetMapping("/admin/task/{id}/edit")
+    public String MyAccountTaskViewEditAdmin(@PathVariable(value = "id") Long id, Model model) {
+        model.addAttribute("post", postService.PostsByIdGet(id));
+        return "adminEdit";
+    }
+    @PostMapping("/admin/task/{id}/edit")
+    public String MyAccountTaskEditAdmin(@PathVariable(value = "id") Long id, @RequestParam String title, @RequestParam String condition, @RequestParam String theme, Model model) {
+        model.addAttribute("post", adminService.TaskEditAdmin(id, title, condition, theme));
+        return "redirect:/admin";
+    }
+    @GetMapping("/admin/task/{id}/view")
+    public String MyAccountTaskViewAdmin(@PathVariable(value = "id") Long id, Model model) {
+        model.addAttribute("post", adminService.TaskViewAdmin(id));
+        return "adminView";
+    }
+    @PostMapping("/admin/{taskId}/remove")
+    public String TaskDeleteAdmin( @PathVariable(value = "taskId") Long taskId) {
+        adminService.DeleteTaskByIdAdmin(taskId);
+        return "redirect:/admin";
+    }
+    @GetMapping("/admin/addNew/{userid}")
+    public String AddNewTaskAdmin() {
+
+        return "addNewAdmin";
+    }
+    @PostMapping("/admin/addNew/{userId}")
+    public String AddNewTaskAdmin(@PathVariable(value = "userId") String userId,@RequestParam String title, @RequestParam String condition, @RequestParam String theme, Model model) {
+        postService.addNewTask(title, condition, theme, userId);
+        return "/admin/{userId}";
+    }
 }
 
 

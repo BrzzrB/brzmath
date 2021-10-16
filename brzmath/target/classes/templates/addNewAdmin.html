@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills">
+        <li class="nav-item"><a href="/MyAccount" class="nav-link active">Back</a></li>
+    </ul>
+</header>
+<div class="container mt-5">
+    <h1 class="text-center">Add new task</h1><br>
+
+    <form action="/addNew" method="post">
+        <input type="text" name="title" placeholder="Title" class="form-control"><br>
+        <textarea name="condition" placeholder="Condition" class="form-control"></textarea><br>
+        <div class="btn-group d-flex" role="group">
+            <input type="radio" name="theme" value="Geometry">Geometry<Br>
+            <input type="radio" name="theme" value="Algebra">Algebra<Br>
+            <input type="radio" name="theme" value="Python">Python<Br>
+            <input type="radio" name="theme" value="Logic">Logic<Br>
+            <input type="radio" name="theme" value="Java">Java<Br>
+        </div>
+
+        <br>
+        <br>
+        <button type="submit" class="btn btn-success">Add</button>
+    </form>
+</div>
+</body>
+</html>

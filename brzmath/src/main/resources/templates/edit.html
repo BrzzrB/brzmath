@@ -24,7 +24,13 @@
             <h5>Condition</h5>
             <textarea name="condition" placeholder="Condition" class="form-control" th:text="${el.condition}"/><br>
             <h5>Theme</h5>
-            <input type="text" name="theme" th:value="${el.theme}" placeholder="Theme" class="form-control"><br>
+            <div class="btn-group d-flex" role="group">
+                <input type="radio" name="theme" value="Geometry">Geometry<Br>
+                <input type="radio" name="theme" value="Algebra">Algebra<Br>
+                <input type="radio" name="theme" value="Python">Python<Br>
+                <input type="radio" name="theme" value="Logic">Logic<Br>
+                <input type="radio" name="theme" value="Java">Java<Br>
+            </div><br>
             <button type="submit" class="btn btn-outline-success">Edit</button>
         </form>
     </div>
