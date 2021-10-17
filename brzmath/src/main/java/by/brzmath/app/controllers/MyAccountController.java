@@ -1,9 +1,5 @@
 package by.brzmath.app.controllers;
 
-import by.brzmath.app.models.Post;
-import by.brzmath.app.models.User;
-import by.brzmath.app.repositories.PostRepository;
-import by.brzmath.app.repositories.UserRepository;
 import by.brzmath.app.services.PostService;
 import by.brzmath.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +9,6 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.text.SimpleDateFormat;
@@ -25,19 +19,11 @@ public class MyAccountController {
     @Autowired
     private PostService postService;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PostRepository postRepository;
-    @Autowired
     private UserService userService;
     @Autowired
-    public MyAccountController(PostService postService, PostRepository postRepository, UserService userService) {
+    public MyAccountController(PostService postService, UserService userService) {
         this.postService = postService;
-        this.postRepository = postRepository;
         this.userService = userService;
-    }
-    public MyAccountController(UserRepository userRepository) {
-        this.userRepository = userRepository;
     }
 
     @GetMapping("/MyAccount")
@@ -64,6 +50,4 @@ public class MyAccountController {
 
         return "MyAccount";
     }
-
-
 }

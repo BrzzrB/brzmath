@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,14 +40,19 @@ public class PostService {
         post.setTheme(theme);
         postRepository.save(post);
     }
-    public void addNewTask(String title, String condition, String theme, String userId)
+    public void addNewTask(String title, String condition, String theme, String userId, String answerOne, String answerTwo, String answerThree)
     {
-        Post post = new Post(title, condition, theme, userId);
+        Post post = new Post(title, condition, theme, userId, answerOne, answerTwo, answerThree);
         postRepository.save(post);
     }
     public Object findAllByUserId(String name)
     {
         Iterable<Post> posts = postRepository.findAllByUserId(name);
+        return posts;
+    }
+    public List<Post> findAllIndex()
+    {
+        List<Post> posts = postRepository.findAll();
         return posts;
     }
 }

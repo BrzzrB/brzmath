@@ -60,14 +60,6 @@ public class UserService {
         return userRepository.findAllByOrderByIdAsc();
     }
 
-    public long countUsers(){
-        return userRepository.count();
-    }
-
-    public long countAllBySocial(String social){
-        return userRepository.countAllBySocial(social);
-    }
-
     public void deleteById(long id){
         userRepository.deleteById(id);
     }

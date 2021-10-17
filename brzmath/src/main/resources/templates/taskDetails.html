@@ -11,32 +11,32 @@
     <title>User page</title>
 </head>
 <body>
-<div class="container">
-    <header class="d-flex justify-content-center py-3">
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a href="/MyAccount" class="nav-link active">Back</a></li>
-        </ul>
-    </header>
-    <style>
-        .divv {
-            height: auto;
-            outline: 1px solid #1E90FF;
-            border-radius: 10px;
-        }
-    </style>
-    <div th:each="el: ${post}" class="text-center">
-        <h1 class="card-title"><p th:text="${el.title}"></p></h1>
-        <div class="divv">
-            <p class="card-text-left mb-auto" th:text="${el.condition}"></p>
+    <div class="container">
+        <header class="d-flex justify-content-center py-3">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/MyAccount" class="nav-link active">Back</a></li>
+            </ul>
+        </header>
+        <style>
+            .divv {
+                height: auto;
+                outline: 1px solid #1E90FF;
+                border-radius: 10px;
+            }
+        </style>
+        <div th:each="el: ${post}" class="text-center">
+            <h1 class="card-title"><p th:text="${el.title}"></p></h1>
+            <div class="divv">
+                <p class="card-text-left mb-auto" th:text="${el.condition}"></p>
+            </div>
         </div>
+        <br>
+        <form class="form-inline" method="post">
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="text" name ="answer" class="form-control" placeholder="Answer">
+            </div>
+            <button type="submit" class="btn btn-outline-success mb-2">Check</button>
+        </form>
     </div>
-    <br>
-    <form class="form-inline">
-        <div class="form-group mx-sm-3 mb-2">
-            <input type="text" class="form-control" placeholder="Answer">
-        </div>
-        <button type="submit" class="btn btn-outline-success mb-2">Check</button>
-    </form>
-</div>
 </body>
 </html>

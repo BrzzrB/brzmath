@@ -10,29 +10,40 @@
     <title>Title</title>
 </head>
 <body>
-<header class="d-flex justify-content-center py-3">
-    <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/MyAccount" class="nav-link active">Back</a></li>
-    </ul>
-</header>
-<div class="container mt-5">
-    <h1 class="text-center">Add new task</h1><br>
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/MyAccount" class="nav-link active">Back</a></li>
+        </ul>
+    </header>
+    <div class="container mt-5">
 
-    <form action="/addNew" method="post">
-        <input type="text" name="title" placeholder="Title" class="form-control"><br>
-        <textarea name="condition" placeholder="Condition" class="form-control"></textarea><br>
-        <div class="btn-group d-flex" role="group">
-            <input type="radio" name="theme" value="Geometry">Geometry<Br>
-            <input type="radio" name="theme" value="Algebra">Algebra<Br>
-            <input type="radio" name="theme" value="Python">Python<Br>
-            <input type="radio" name="theme" value="Logic">Logic<Br>
-            <input type="radio" name="theme" value="Java">Java<Br>
-        </div>
+        <h1 class="text-center">Add new task</h1><br>
 
-        <br>
-        <br>
-        <button type="submit" class="btn btn-success">Add</button>
-    </form>
-</div>
+        <form action="/addNew" method="post">
+            <input type="text" name="title" placeholder="Title" class="form-control"><br>
+            <textarea name="condition" placeholder="Condition" class="form-control"></textarea><br>
+            <div class="row">
+                <div class="col-sm">
+                    <textarea name="answerOne" placeholder="Answer option 1" class="form-control"></textarea>
+                </div>
+                <div class="col-sm">
+                    <textarea name="answerTwo" placeholder="Answer option 2" class="form-control"></textarea>
+                </div>
+                <div class="col-sm">
+                    <textarea name="answerThree" placeholder="Answer option 3" class="form-control"></textarea>
+                </div>
+            </div>
+            <br>
+
+            <div class="btn-group d-flex" role="group">
+                <input type="radio" name="theme" value="Geometry">Geometry<Br>
+                <input type="radio" name="theme" value="Algebra">Algebra<Br>
+                <input type="radio" name="theme" value="Python">Python<Br>
+                <input type="radio" name="theme" value="Logic">Logic<Br>
+                <input type="radio" name="theme" value="Java">Java<Br>
+            </div><br><br>
+            <button type="submit" class="btn btn-success">Add</button>
+        </form>
+    </div>
 </body>
 </html>

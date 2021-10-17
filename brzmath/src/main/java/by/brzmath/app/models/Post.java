@@ -1,7 +1,6 @@
 package by.brzmath.app.models;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -13,7 +12,7 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title, condition, theme, userId;
+    private String title, condition, theme, userId, answerone, answertwo, answerthree;
     private int views;
 
     public Long getId() {
@@ -64,14 +63,41 @@ public class Post {
         this.userId = userId;
     }
 
+    public String getAnswerone() {
+        return answerone;
+    }
+
+    public void setAnswerone(String answerOne) {
+        this.answerone = answerOne;
+    }
+
+    public String getAnswertwo() {
+        return answertwo;
+    }
+
+    public void setAnswertwo(String answerTwo) {
+        this.answertwo = answerTwo;
+    }
+
+    public String getAnswerthree() {
+        return answerthree;
+    }
+
+    public void setAnswerthree(String answerThree) {
+        this.answerthree = answerThree;
+    }
+
     public Post() {
     }
 
-    public Post(String title, String condition, String theme, String userId) {
+    public Post(String title, String condition, String theme, String userId, String answerone, String answertwo, String answerthree) {
         this.title = title;
         this.condition = condition;
         this.theme = theme;
         this.userId = userId;
+        this.answerone = answerone;
+        this.answertwo = answertwo;
+        this.answerthree = answerthree;
     }
 }
 

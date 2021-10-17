@@ -10,105 +10,105 @@
     <title>User page</title>
 </head>
 <body>
-<div class="container">
-    <header class="d-flex justify-content-center py-3">
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a href="/" class="nav-link" aria-current="page">Main page</a></li>
-            <li class="nav-item"><a href="/MyAccount" class="nav-link active">My account</a></li>
-        </ul>
-        <div id="accordion">
-            <div class="card text-center mb-3">
-                <div class="card-header bg-white" id="headingOne">
-                    <h5 class="mb-0">
-                        <button class="btn btn-outline-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <div th:each="el: ${users}">
-                                <span th:text="${el.username}"></span>
-                            </div>
-                        </button>
-                    </h5>
-                </div>
+    <div class="container">
+        <header class="d-flex justify-content-center py-3">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/" class="nav-link" aria-current="page">Main page</a></li>
+                <li class="nav-item"><a href="/MyAccount" class="nav-link active">My account</a></li>
+            </ul>
+            <div id="accordion">
+                <div class="card text-center mb-3">
+                    <div class="card-header bg-white" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-outline-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <div th:each="el: ${users}">
+                                    <span th:text="${el.username}"></span>
+                                </div>
+                            </button>
+                        </h5>
+                    </div>
 
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
-                        <div th:each="el: ${users}">
-                            <p th:text="'ID: ' + ${user_p}"></p>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <div th:each="el: ${users}">
+                                <p th:text="'ID: ' + ${user_p}"></p>
+                                <p>
+                                    <span th:text="'Created tasks: '+ ${el.createdTasks} + ' | '"></span>
+                                    <span th:text="'Solved tasks: ' + ${el.solvedTasks}"></span>
+                                </p>
+                            </div>
                             <p>
-                                <span th:text="'Created tasks: '+ ${el.createdTasks} + ' | '"></span>
-                                <span th:text="'Solved tasks: ' + ${el.solvedTasks}"></span>
+                                <a href="/addNew" class="btn btn-primary">Add new task</a>
+                                <a href="/logout" class="btn btn-outline-danger">Logout</a>
                             </p>
                         </div>
-                        <p>
-                            <a href="/addNew" class="btn btn-primary">Add new task</a>
-                            <a href="/logout" class="btn btn-outline-danger">Logout</a>
-                        </p>
                     </div>
                 </div>
             </div>
-        </div>
-        <style>
-            #accordion
-            {
-                margin-left: auto;
-                font-size: 16px;
-            }
-        </style>
-    </header>
-    <div class="row justify-content-center">
-        <div class="col">
-            <table id="tasks-table" class="table table table-light">
-                <thead class="table">
-                <tr>
-                    <th scope="col" style="width: 5%">
-                        <input type="checkbox" onchange="checkedDisplayed(this)">
-                    </th>
-                    <th scope="col" style="width: 5%">Task id</th>
-                    <th scope="col" style="width: 10%">Title</th>
-                    <th scope="col" style="width: 10%">
-                        <select id="socialSelect" class="form-select" onchange="myFilter()">
-                            <option selected>Theme</option>
-                            <option>Geometry</option>
-                            <option>Algebra</option>
-                            <option>Python</option>
-                            <option>Logic</option>
-                            <option>Java</option>
-                        </select>
-                    </th>
-                    <th scope="col" style="width: 10%">Views</th>
-                    <th scope="col" style="width: 7%">View</th>
-                    <th scope="col" style="width: 7%">Edit</th>
-                    <th scope="col" style="width: 7%">Delete</th>
-                </tr>
-
-                </thead>
-                <tbody>
-                    <tr th:each="post:${posts}">
-                        <td scope="row" style="width: 5%"><input type="checkbox"></td>
-                        <td th:text="${post.id}" style="width: 10%">task id</td>
-                        <td th:text="${post.title}" style="width: 10%">title</td>
-                        <td th:text="${post.theme}" style="width: 10%">theme</td>
-                        <td th:text="${post.views}" style="width: 10%">views</td>
-                        <td><a th:href="'/task/' + ${post.id}" style="text-decoration: none;">view</a>
-                        <td><a th:href="'/task/' + ${post.id} + '/edit'" style="text-decoration: none;">edit</a>
-                        <td><a th:href="'/task/' + ${post.id} + '/remove'" style="text-decoration: none;">delete</a>
-
-                    </tr>
-                </tbody>
-            </table>
             <style>
-                table tr td a {
-                    display:block;
-                    height:100%;
-                    width:100%;
-                }
-                table tr td {
-                    padding-left: 0;
-                    padding-right: 0;
+                #accordion
+                {
+                    margin-left: auto;
+                    font-size: 16px;
                 }
             </style>
-        </div>
-    </div>
+        </header>
+        <div class="row justify-content-center">
+            <div class="col">
+                <table id="tasks-table" class="table table table-light">
+                    <thead class="table">
+                    <tr>
+                        <th scope="col" style="width: 5%">
+                            <input type="checkbox" onchange="checkedDisplayed(this)">
+                        </th>
+                        <th scope="col" style="width: 5%">Task id</th>
+                        <th scope="col" style="width: 10%">Title</th>
+                        <th scope="col" style="width: 10%">
+                            <select id="socialSelect" class="form-select" onchange="myFilter()">
+                                <option selected>Theme</option>
+                                <option>Geometry</option>
+                                <option>Algebra</option>
+                                <option>Python</option>
+                                <option>Logic</option>
+                                <option>Java</option>
+                            </select>
+                        </th>
+                        <th scope="col" style="width: 10%">Views</th>
+                        <th scope="col" style="width: 7%">View</th>
+                        <th scope="col" style="width: 7%">Edit</th>
+                        <th scope="col" style="width: 7%">Delete</th>
+                    </tr>
 
-</div>
+                    </thead>
+                    <tbody>
+                        <tr th:each="post:${posts}">
+                            <td scope="row" style="width: 5%"><input type="checkbox"></td>
+                            <td th:text="${post.id}" style="width: 10%">task id</td>
+                            <td th:text="${post.title}" style="width: 10%">title</td>
+                            <td th:text="${post.theme}" style="width: 10%">theme</td>
+                            <td th:text="${post.views}" style="width: 10%">views</td>
+                            <td><a th:href="'/task/' + ${post.id}" style="text-decoration: none;">view</a>
+                            <td><a th:href="'/task/' + ${post.id} + '/edit'" style="text-decoration: none;">edit</a>
+                            <td><a th:href="'/task/' + ${post.id} + '/remove'" style="text-decoration: none;">delete</a>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <style>
+                    table tr td a {
+                        display:block;
+                        height:100%;
+                        width:100%;
+                    }
+                    table tr td {
+                        padding-left: 0;
+                        padding-right: 0;
+                    }
+                </style>
+            </div>
+        </div>
+
+    </div>
 <script type="text/javascript" src="/js/blockedScript.js"></script>
 <script type="text/javascript" src="js/filterAndSortTableUser.js"></script>
 <script type="text/javascript" src="js/buttonsScripts.js"></script>

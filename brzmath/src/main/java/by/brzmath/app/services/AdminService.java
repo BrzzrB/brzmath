@@ -37,4 +37,9 @@ public class AdminService {
         postRepository.save(post);
         return null;
     }
+    public void addNewTaskAdmin(String title, String condition, String theme, String userId, String answerOne, String answerTwo, String answerThree)
+    {
+        Post post = new Post(title, condition, theme, userId, answerOne, answerTwo, answerThree);
+        postRepository.save(post);
+    }
 }

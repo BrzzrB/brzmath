@@ -29,9 +29,6 @@ public class AdminPageController {
         this.postService = postService;
     }
 
-    @Autowired
-    private PostRepository postRepository;
-
     @GetMapping("/admin")
     public String addUser(Model model, Principal principal){
 
@@ -99,9 +96,16 @@ public class AdminPageController {
         return "addNewAdmin";
     }
     @PostMapping("/admin/addNew/{userId}")
-    public String AddNewTaskAdmin(@PathVariable(value = "userId") String userId,@RequestParam String title, @RequestParam String condition, @RequestParam String theme, Model model) {
-        postService.addNewTask(title, condition, theme, userId);
-        return "/admin/{userId}";
+    public String AddNewTaskAdmin(
+                             @PathVariable(value = "userId") String userId,
+                             @RequestParam String title,
+                             @RequestParam String condition,
+                             @RequestParam String theme,
+                             @RequestParam (value = "answerOne", required = false) String answerOne,
+                             @RequestParam (value = "answerTwo", required = false) String answerTwo,
+                             @RequestParam (value = "answerThree", required = false) String answerThree) {
+        adminService.addNewTaskAdmin(title, condition, theme, userId, answerOne, answerTwo, answerThree);
+        return "redirect:/MyAccount";
     }
 }
 
