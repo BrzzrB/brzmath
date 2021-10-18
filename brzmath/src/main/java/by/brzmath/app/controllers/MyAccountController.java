@@ -27,7 +27,13 @@ public class MyAccountController {
     }
 
     @GetMapping("/MyAccount")
-    public String accountMain(Model model) {
+    public String accountMain(Model model, Principal principal) {
+        OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) principal;
+        if (userService.isContainsByToken(token)){
+            userService.setLastDateByUsername(token);
+        }else{
+            userService.addUserByToken(token);
+        }
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 

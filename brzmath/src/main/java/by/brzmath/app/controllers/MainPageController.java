@@ -16,9 +16,11 @@ public class MainPageController {
         this.postService = postService;
     }
 
+
     @GetMapping("/")
     public String accountIndex(Model model) {
         model.addAttribute("posts", postService.findAllIndex());
+
         return "index";
     }
 
