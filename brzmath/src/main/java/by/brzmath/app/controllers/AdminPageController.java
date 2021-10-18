@@ -1,6 +1,5 @@
 package by.brzmath.app.controllers;
 
-import by.brzmath.app.repositories.PostRepository;
 import by.brzmath.app.services.AdminService;
 import by.brzmath.app.services.PostService;
 import by.brzmath.app.services.UserService;
@@ -37,15 +36,7 @@ public class AdminPageController {
         model.addAttribute("dateformat",new SimpleDateFormat("yyyy.MM.dd"));
         model.addAttribute("blocked",
                 userService.findAllByToken(token).isEmpty() ||
-                        userService.findAllByToken(token).get(0).isBlocked()
-        );
-        model.addAttribute("idUser",userService.findAllByToken(token).get(0).getId());
-        model.addAttribute("users",userService.findAllByOrderByIdAsc());
-        model.addAttribute("dateformat",new SimpleDateFormat("yyyy.MM.dd"));
-        model.addAttribute("blocked",
-                userService.findAllByToken(token).isEmpty() ||
-                        userService.findAllByToken(token).get(0).isBlocked()
-        );
+                            userService.findAllByToken(token).get(0).isBlocked());
         model.addAttribute("idUser",userService.findAllByToken(token).get(0).getId());
         return "admin";
     }
@@ -90,21 +81,20 @@ public class AdminPageController {
         adminService.DeleteTaskByIdAdmin(taskId);
         return "redirect:/admin";
     }
-    @GetMapping("/admin/addNew/{userid}")
+    @GetMapping("/admin/addNew/{useridAdmin}")
     public String AddNewTaskAdmin() {
-
-        return "addNewAdmin";
+          return "addNewAdmin";
     }
-    @PostMapping("/admin/addNew/{userId}")
+    @PostMapping("/admin/addNew/{userIdAdmin}")
     public String AddNewTaskAdmin(
-                             @PathVariable(value = "userId") String userId,
+                             @PathVariable(value = "userIdAdmin") String userIdAdmin,
                              @RequestParam String title,
                              @RequestParam String condition,
                              @RequestParam String theme,
                              @RequestParam (value = "answerOne", required = false) String answerOne,
                              @RequestParam (value = "answerTwo", required = false) String answerTwo,
                              @RequestParam (value = "answerThree", required = false) String answerThree) {
-        adminService.addNewTaskAdmin(title, condition, theme, userId, answerOne, answerTwo, answerThree);
+        adminService.addNewTaskAdmin(title, condition, theme, userIdAdmin, answerOne, answerTwo, answerThree);
         return "redirect:/MyAccount";
     }
 }

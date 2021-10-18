@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     Iterable<Post> findAllByUserId(String userId);
+
+//    Iterable<Post> findAllByAnswerAndId(String userAnswer, Long Id);
 }

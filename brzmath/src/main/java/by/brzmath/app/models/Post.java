@@ -12,7 +12,7 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title, condition, theme, userId, answerone, answertwo, answerthree;
+    private String title, condition, theme, userId, answerOne, answerTwo, answerThree;
     private int views;
 
     public Long getId() {
@@ -63,41 +63,41 @@ public class Post {
         this.userId = userId;
     }
 
-    public String getAnswerone() {
-        return answerone;
+    public String getAnswerOne() {
+        return answerOne;
     }
 
-    public void setAnswerone(String answerOne) {
-        this.answerone = answerOne;
+    public void setAnswerOne(String answerOne) {
+        this.answerOne = answerOne;
     }
 
-    public String getAnswertwo() {
-        return answertwo;
+    public String getAnswerTwo() {
+        return answerTwo;
     }
 
-    public void setAnswertwo(String answerTwo) {
-        this.answertwo = answerTwo;
+    public void setAnswerTwo(String answerTwo) {
+        this.answerTwo = answerTwo;
     }
 
-    public String getAnswerthree() {
-        return answerthree;
+    public String getAnswerThree() {
+        return answerThree;
     }
 
-    public void setAnswerthree(String answerThree) {
-        this.answerthree = answerThree;
+    public void setAnswerThree(String answerThree) {
+        this.answerThree = answerThree;
     }
 
     public Post() {
     }
 
-    public Post(String title, String condition, String theme, String userId, String answerone, String answertwo, String answerthree) {
+    public Post(String title, String condition, String theme, String userId, String answerOne, String answerTwo, String answerThree) {
         this.title = title;
         this.condition = condition;
         this.theme = theme;
         this.userId = userId;
-        this.answerone = answerone;
-        this.answertwo = answertwo;
-        this.answerthree = answerthree;
+        this.answerOne = answerOne;
+        this.answerTwo = answerTwo;
+        this.answerThree = answerThree;
     }
 }
 

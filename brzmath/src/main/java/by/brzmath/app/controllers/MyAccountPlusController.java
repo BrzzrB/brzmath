@@ -30,11 +30,11 @@ public class MyAccountPlusController {
                              @RequestParam String title,
                              @RequestParam String condition,
                              @RequestParam String theme,
-                             @RequestParam (value = "answerOne", required = false) String answerone,
-                             @RequestParam (value = "answerTwo", required = false) String answertwo,
-                             @RequestParam (value = "answerThree", required = false) String answerthree) {
+                             @RequestParam (value = "answerOne", required = false) String answerOne,
+                             @RequestParam (value = "answerTwo", required = false) String answerTwo,
+                             @RequestParam (value = "answerThree", required = false) String answerThree) {
         String userId = principal.getName();
-        postService.addNewTask(title, condition, theme, userId, answerone, answertwo, answerthree);
+        postService.addNewTask(title, condition, theme, userId, answerOne, answerTwo, answerThree);
         return "redirect:/MyAccount";
     }
 

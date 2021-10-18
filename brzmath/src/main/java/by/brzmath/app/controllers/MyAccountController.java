@@ -27,23 +27,10 @@ public class MyAccountController {
     }
 
     @GetMapping("/MyAccount")
-    public String accountMain(Model model, Principal principal) {
-
-        OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) principal;
-        if (userService.isContainsByToken(token)){
-            userService.setLastDateByUsername(token);
-        }else{
-            userService.addUserByToken(token);
-        }
-        model.addAttribute("users",userService.findAllByOrderByIdAsc());
-        model.addAttribute("dateformat",new SimpleDateFormat("yyyy.MM.dd"));
-        model.addAttribute("blocked",
-                userService.findAllByToken(token).isEmpty() ||
-                        userService.findAllByToken(token).get(0).isBlocked()
-        );
-        model.addAttribute("idUser",userService.findAllByToken(token).get(0).getId());
+    public String accountMain(Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
         model.addAttribute("posts", postService.findAllByUserId(auth.getName()));
         model.addAttribute("users", userService.findAllByUserIdPrincipal(auth.getName()));
         model.addAttribute("user_p", auth.getName());

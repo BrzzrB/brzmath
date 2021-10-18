@@ -55,4 +55,9 @@ public class PostService {
         List<Post> posts = postRepository.findAll();
         return posts;
     }
+//    public Iterable<Post> findAnswer(String userAnswer, Long Id)
+//    {
+//        Iterable<Post> answer = postRepository.findAllByAnswerAndId(userAnswer, Id);
+//        return answer;
+//    }
 }
